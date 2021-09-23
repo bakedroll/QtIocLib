@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
-#include <QtIocLib/QtIocApplication.h>
+#include <QtUtilsLib/QtUtilsApplication.h>
+
 
 extern int    g_argc;
 extern char** g_argv;
@@ -14,33 +15,30 @@ public:
 class Implementation : public Interface
 {
 public:
-  Implementation(iocLib::StdInjector& injector)
+  Implementation(utilsLib::StdInjector& injector)
   {
   }
 };
 
 std::shared_ptr<Interface> g_pObj;
 
-class TestApplication : public QtIocLib::StdQtIocApplication
+class TestApplication : public QtUtilsLib::StdQtIocApplication
 {
 public:
   TestApplication(int& argc, char** argv)
-    : QtIocLib::StdQtIocApplication(argc, argv)
+    : QtUtilsLib::StdQtIocApplication(argc, argv)
   {
   }
 
-  ~TestApplication() override
-  {
-    printf("bla");
-  }
+  ~TestApplication() override = default;
 
 protected:
-  virtual void initialize(iocLib::StdInjector& injector) override
+  virtual void initialize(utilsLib::StdInjector& injector) override
   {
     g_pObj = injector.inject<Interface>();
   }
 
-  virtual void registerComponents(iocLib::StdInjectionContainer& container) override
+  virtual void registerComponents(utilsLib::StdInjectionContainer& container) override
   {
     container.registerSingletonInterfaceType<Interface, Implementation>();
   }
@@ -55,6 +53,7 @@ TEST(ApplicationTest, Bootstrap)
   app->setupIOC();
 
   EXPECT_NE(g_pObj, nullptr);
+  g_pObj.reset();
 
   app.reset(nullptr);
 }

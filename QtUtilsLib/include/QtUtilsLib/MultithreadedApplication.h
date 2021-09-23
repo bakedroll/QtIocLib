@@ -4,7 +4,7 @@
 
 #include <functional>
 
-namespace QtIocLib
+namespace QtUtilsLib
 {
 
   /*!

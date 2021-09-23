@@ -1,8 +1,8 @@
-#include "QtIocLib/MultithreadedApplication.h"
+#include "QtUtilsLib/MultithreadedApplication.h"
 
 #include <QThread>
 
-namespace QtIocLib
+namespace QtUtilsLib
 {
 
 MultithreadedApplication::MultithreadedApplication(int& argc, char** argv)

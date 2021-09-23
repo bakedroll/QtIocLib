@@ -8,10 +8,10 @@ else()
   return()
 endif()
 
-project(QtIocLib)
+project(QtUtilsLib)
 
-add_subdirectory(QtIocLib)
-add_subdirectory(QtIocLibTest)
+add_subdirectory(QtUtilsLib)
+add_subdirectory(QtUtilsLibTest)
 
 make_projects()
 
