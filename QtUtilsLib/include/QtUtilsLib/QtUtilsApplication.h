@@ -34,6 +34,12 @@ public:
     initialize(*m_injector);
   }
 
+  int run()
+  {
+    setupIOC();
+    return exec();
+  }
+
 protected:
   virtual void initialize(utilsLib::Injector<TPtr>& injector) {}
   virtual void registerComponents(utilsLib::InjectionContainer<TPtr>& container) {}

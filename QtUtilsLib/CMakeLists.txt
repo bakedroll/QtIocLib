@@ -2,7 +2,13 @@ begin_project(QtUtilsLib LIBRARY)
 
 enable_automoc()
 
-require_library(Qt6 MODULES Core Gui Widgets)
+if (QT_USE_VERSION_5)
+  set(QT_VERSION "5")
+else()
+  set(QT_VERSION "6")
+endif()
+
+require_library(Qt${QT_VERSION} MODULES Core Gui Widgets)
 
 require_project(utilsLib PATH utilsLib)
 
