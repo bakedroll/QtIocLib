@@ -22,11 +22,11 @@ public:
 
 std::shared_ptr<Interface> g_pObj;
 
-class TestApplication : public QtUtilsLib::StdQtIocApplication
+class TestApplication : public QtUtilsLib::StdQtUtilsApplication
 {
 public:
   TestApplication(int& argc, char** argv)
-    : QtUtilsLib::StdQtIocApplication(argc, argv)
+    : QtUtilsLib::StdQtUtilsApplication(argc, argv)
   {
   }
 

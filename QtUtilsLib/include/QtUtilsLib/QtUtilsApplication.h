@@ -49,6 +49,6 @@ private:
 
 };
 
-using StdQtIocApplication = QtUtilsApplication<std::shared_ptr<void>>;
+using StdQtUtilsApplication = QtUtilsApplication<std::shared_ptr<void>>;
 
 }
