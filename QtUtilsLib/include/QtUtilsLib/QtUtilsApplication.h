@@ -23,6 +23,7 @@ public:
   ~QtUtilsApplication() override
   {
     m_container.clear();
+    utilsLib::ILoggingManager::destroy();
   }
 
   void setupIOC()
@@ -36,6 +37,11 @@ public:
 protected:
   virtual void initialize(utilsLib::Injector<TPtr>& injector) {}
   virtual void registerComponents(utilsLib::InjectionContainer<TPtr>& container) {}
+
+  utilsLib::Injector<TPtr>&  injector()
+  {
+    return *m_injector;
+  }
 
 private:
   utilsLib::InjectionContainer<TPtr>        m_container;
