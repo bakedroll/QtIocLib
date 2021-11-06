@@ -44,7 +44,7 @@ protected:
   virtual void initialize(utilsLib::Injector<TPtr>& injector) {}
   virtual void registerComponents(utilsLib::InjectionContainer<TPtr>& container) {}
 
-  utilsLib::Injector<TPtr>&  injector()
+  utilsLib::Injector<TPtr>& injector()
   {
     return *m_injector;
   }
