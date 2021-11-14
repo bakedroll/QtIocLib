@@ -4,6 +4,7 @@
 
 #include <utilsLib/Injector.h>
 #include <utilsLib/InjectionContainer.h>
+#include <utilsLib/DependencyInjectionBase.h>
 #include <utilsLib/ILoggingManager.h>
 #include <utilsLib/LoggingManager.h>
 
@@ -11,48 +12,27 @@ namespace QtUtilsLib
 {
 
 template <typename TPtr>
-class QtUtilsApplication : public MultithreadedApplication
+class QtUtilsApplication : public MultithreadedApplication,
+                           public utilsLib::DependencyInjectionBase<TPtr>
 {
 public:
   QtUtilsApplication(int& argc, char** argv)
     : MultithreadedApplication(argc, argv)
+    , utilsLib::DependencyInjectionBase<TPtr>()
   {
     utilsLib::ILoggingManager::create<utilsLib::LoggingManager>();
   }
 
   ~QtUtilsApplication() override
   {
-    m_container.clear();
     utilsLib::ILoggingManager::destroy();
-  }
-
-  void setupIOC()
-  {
-    m_injector = std::make_unique<utilsLib::Injector<TPtr>>(m_container);
-
-    registerComponents(m_container);
-    initialize(*m_injector);
   }
 
   int run()
   {
-    setupIOC();
+    utilsLib::DependencyInjectionBase<TPtr>::setupIOC();
     return exec();
   }
-
-protected:
-  virtual void initialize(utilsLib::Injector<TPtr>& injector) {}
-  virtual void registerComponents(utilsLib::InjectionContainer<TPtr>& container) {}
-
-  utilsLib::Injector<TPtr>& injector()
-  {
-    return *m_injector;
-  }
-
-private:
-  utilsLib::InjectionContainer<TPtr>        m_container;
-  std::unique_ptr<utilsLib::Injector<TPtr>> m_injector;
-
 };
 
 using StdQtUtilsApplication = QtUtilsApplication<std::shared_ptr<void>>;
