@@ -2,7 +2,7 @@ begin_project(QtUtilsLibTest EXECUTABLE OPTIONAL)
 
 enable_automoc()
 
-require_library(Qt6 MODULES Core Gui Widgets)
+require_library(Qt MODULES Core Gui Widgets)
 
 require_library(GTest)
 
