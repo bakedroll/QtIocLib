@@ -2,7 +2,7 @@ begin_project(QtUtilsLib LIBRARY)
 
 enable_automoc()
 
-require_library(Qt MODULES Core Gui Widgets)
+require_library(Qt MODULES Core)
 
 require_project(utilsLib PATH utilsLib)
 

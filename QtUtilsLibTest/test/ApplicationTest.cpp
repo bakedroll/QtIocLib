@@ -25,12 +25,15 @@ std::shared_ptr<Interface> g_pObj;
 class TestApplication : public QtUtilsLib::StdQtUtilsApplication
 {
 public:
-  TestApplication(int& argc, char** argv)
-    : QtUtilsLib::StdQtUtilsApplication(argc, argv)
+  TestApplication()
+    : QtUtilsLib::StdQtUtilsApplication()
   {
   }
 
   ~TestApplication() override = default;
+
+  int execApp() override { return 0; }
+  void quitApp() override {}
 
 protected:
   virtual void initialize(utilsLib::StdInjector& injector) override
@@ -46,7 +49,7 @@ protected:
 
 TEST(ApplicationTest, Bootstrap)
 {
-  auto app = std::make_unique<TestApplication>(g_argc, g_argv);
+  auto app = std::make_unique<TestApplication>();
 
   EXPECT_EQ(g_pObj, nullptr);
 

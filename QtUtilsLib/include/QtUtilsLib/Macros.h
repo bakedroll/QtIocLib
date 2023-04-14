@@ -2,6 +2,8 @@
 
 #include <utilsLib/Utils.h>
 
+#include <QString>
+
 #ifdef _DEBUG
 #define UTILS_QLOG_TRACE(msg) UTILS_LOG_TRACE(std::string(msg.toLocal8Bit().constData()))
 #define UTILS_QLOG_DEBUG(msg) UTILS_LOG_DEBUG(std::string(msg.toLocal8Bit().constData()))

@@ -1,24 +1,17 @@
 #pragma once
 
-#include <QtUtilsLib/MultithreadedApplication.h>
-
-#include <utilsLib/Injector.h>
-#include <utilsLib/InjectionContainer.h>
 #include <utilsLib/DependencyInjectionBase.h>
-#include <utilsLib/ILoggingManager.h>
 #include <utilsLib/LoggingManager.h>
 
 namespace QtUtilsLib
 {
 
 template <typename TPtr>
-class QtUtilsApplication : public MultithreadedApplication,
-                           public utilsLib::DependencyInjectionBase<TPtr>
+class QtUtilsApplication : public utilsLib::DependencyInjectionBase<TPtr>
 {
 public:
-  QtUtilsApplication(int& argc, char** argv)
-    : MultithreadedApplication(argc, argv)
-    , utilsLib::DependencyInjectionBase<TPtr>()
+  QtUtilsApplication() :
+    utilsLib::DependencyInjectionBase<TPtr>()
   {
     utilsLib::ILoggingManager::create<utilsLib::LoggingManager>();
   }
@@ -28,10 +21,13 @@ public:
     utilsLib::ILoggingManager::destroy();
   }
 
+  virtual int execApp() = 0;
+  virtual void quitApp() = 0;
+
   int run()
   {
     utilsLib::DependencyInjectionBase<TPtr>::setupIOC();
-    return exec();
+    return execApp();
   }
 };
 
